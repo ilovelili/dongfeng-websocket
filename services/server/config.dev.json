@@ -1,0 +1,15 @@
+{
+    "auth": {        
+        "jwks": "https://dongfeng.auth0.com/.well-known/jwks.json"
+    },
+    "services": {
+        "nats": {
+            "host": "nats://natserver:4222",
+            "maxconnectioncount": 10,
+            "topics": "dongfeng.svc.message,dongfeng.svc.notification"
+        },        
+        "websocket": {
+            "host": "websocket:8890"
+        }
+    }
+}
