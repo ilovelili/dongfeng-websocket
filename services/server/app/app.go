@@ -2,6 +2,9 @@ package app
 
 import (
 	"sync"
+
+	"github.com/ilovelili/dongfeng-websocket/services/utils"
+	natsws "github.com/ilovelili/websocket-nats"
 )
 
 var (
@@ -11,7 +14,6 @@ var (
 
 // App app object wraps the neccessary domains
 type App struct {
-	// TBD
 	Config *natsws.Config
 	Server *natsws.NatsWebSocket
 }
@@ -38,7 +40,7 @@ func (app *App) init() (*App, error) {
 
 // initializeConfig init config
 func (app *App) initializeConfig() (*App, error) {
-	config := util.GetConfig()
+	config := utils.GetConfig()
 
 	app.Config = &natsws.Config{
 		ListenInterface: config.WebSocket.Host,
@@ -46,7 +48,7 @@ func (app *App) initializeConfig() (*App, error) {
 		URLPattern:      "/",
 		NatsAddress:     config.Nats.Host,
 		NatsPoolSize:    config.Nats.GetMaxConnectionCount(),
-		NatsTopics:      util.GetNatsTopics(config.Nats.Topics),
+		NatsTopics:      utils.GetNatsTopics(config.Nats.Topics),
 	}
 
 	return app, nil

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  labels:
+    deployment: dongfeng-websocket
+  namespace: dongfeng-back
+  name: dongfeng-websocket
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dongfeng-websocket
+  template:
+    metadata:      
+      labels:
+        app: dongfeng-websocket
+    spec:      
+      containers:
+      - name: dongfeng-websocket        
+        image: ilovelili/dongfeng-websocket:latest
+        imagePullPolicy: Always
+        command: [
+          "./server",
+        ]
+        env:        
+        - name: DF_ENVIROMENT
+          value: dev
+        ports:
+        - containerPort: 8890
+          name: api-port
